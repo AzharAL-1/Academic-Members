@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        main{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form id="signup-form">
+                <label for="fullName">الاسم الكامل:</label>
+                <input type="text" id="fullName" name="fullName" required>
+                <label for="faculty">هل أنت عضو هيئة تدريس؟</label>
+                <select id="faculty" name="faculty" onchange="checkFacultyMember()" required>
+                    <option value="yes">نعم</option>
+                    <option value="no">لا</option>
+                </select>
+                <p id="faculty-message" style="color: red;"></p>
+                <label for="specialty">التخصص:</label>
+                <select id="specialty" name="specialty" required>
+                    <option value="" disabled selected>اختر تخصص</option>
+                    <option value="مناهج وطرق تدريس العلوم">مناهج وطرق تدريس العلوم</option>
+                    <option value="تقنيات التعليم">تقنيات التعليم</option>
+                    <option value="الحاسب الآلي">الحاسب الآلي</option>
+                    <option value="نظم معلومات">نظم معلومات</option>
+                    <option value="علم نفس">علم نفس</option>
+                    <option value="طفولة مبكرة">طفولة مبكرة</option>
+                    <option value="أصول تربية">أصول تربية</option>
+                    <option value="طب أسرة">طب أسرة</option>
+                    <option value="طب أسنان">طب أسنان</option>
+                    <option value="إدارة تربوية">إدارة تربوية</option>
+                </select>
+
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">رقم الهاتف:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="username">اسم المستخدم:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="confirmPassword">تأكيد كلمة المرور:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+                <button type="submit" id="submit">إنشاء حساب</button>
+            </form>
+            <p>لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a></p>
+        </div>
+    </main>
+    <script>
+        // Faculty membership check
+        function checkFacultyMember() {
+            let facultyMember = document.getElementById("faculty").value;
+            let message = document.getElementById("faculty-message");
+            if (facultyMember === "no") {
+                message.innerText = "لا يمكنك التسجيل في المنصة لأنها مخصصة لأعضاء هيئة التدريس فقط";
+                document.getElementById("submit").disabled = true;
+            } else {
+                message.innerText = "";
+                document.getElementById("submit").disabled = false;
+            }
+        }
+    </script>
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+</body>
+</html>

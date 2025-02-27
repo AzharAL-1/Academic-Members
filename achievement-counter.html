@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنجازات عضو هيئة التدريس</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+         main {
+    padding: 80px;
+    flex: 1;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            text-align: center;
+            background-color: #F1F9FB; /* Light background */
+        }
+
+        .achievements-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .achievement-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: right;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        .achievement-item h3 {
+            color: #004EA5; /* Deep Blue */
+        }
+
+        .btn {
+            background-color: #FD9349; /* Orange */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #c76a33; /* Darker Orange */
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0195B1; /* Light Blue */
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <h2 style="color: #004EA5;">مؤشرات الإنتاج البحثي</h2>
+        <p>إليك إحصائيات إنتاجك البحثي وحصولك على شهادة الإنجاز عند نشر أبحاثك.</p>
+
+        <!-- Achievements -->
+        <div class="achievements-container">
+            <!-- Research Count -->
+            <div class="achievement-item">
+                <h3>عدد الأبحاث</h3>
+                <p>عدد الأبحاث التي تم إيداعها في مستودع الأبحاث الخاص بك هذا العام: <span id="research-count">3</span> / 4</p>
+            </div>
+
+            <!-- Achievement Certificate -->
+            <div class="achievement-item">
+                <h3>شهادة الإنجاز</h3>
+                <p>إذا قمت بنشر 4 أبحاث خلال هذا العام، ستتمكن من الحصول على شهادة الإنجاز الإلكترونية.</p>
+                <button class="btn" id="issue-certificate" onclick="issueCertificate()">إصدار الشهادة</button>
+            </div>
+        </div>
+
+        <!-- Back Link -->
+        <a href="research-services.html" class="back-link">الرجوع إلى الخدمات</a>
+    </main>
+
+    <footer>
+        <p>© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // Initialize the number of researches (example)
+        let researchCount = 3; // Example value, this would be dynamically loaded
+
+        // Function to handle issuing the certificate
+        function issueCertificate() {
+            if (researchCount >= 4) {
+                alert("عليك مراجعة عمادة البحث و الدراسات العليا. تم إصدار شهادة الإنجاز بنجاح!");
+            } else {
+                alert("لم تكمل 4 أبحاث بعد. قم بنشر المزيد من الأبحاث للحصول على شهادة الإنجاز.");
+            }
+        }
+
+        // Update the research count on page load
+        document.getElementById("research-count").textContent = researchCount;
+    </script>
+
+</body>
+</html>

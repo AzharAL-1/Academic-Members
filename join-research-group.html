@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الانضمام إلى مجموعة بحثية</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .research-groups {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .group-item {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: right;
+            border: 1px solid #ccc;
+        }
+
+        .group-item p {
+            margin: 5px 0;
+        }
+
+        .join-button {
+            background-color: #0195B1;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .join-button:hover {
+            background-color: #FD9349;
+        }
+
+        .join-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .full-group {
+            color: red;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>الانضمام إلى مجموعة بحثية</h2>
+        <p>يمكنك الانضمام إلى المجموعات البحثية المتاحة إذا لم يكتمل عدد الأعضاء.</p>
+
+        <!-- Research Groups List -->
+        <div class="research-groups" id="research-groups-container">
+            <!-- Research groups will be dynamically added here -->
+        </div>
+
+        <a href="research-groups.html" class="back-link">الرجوع</a>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // Sample research groups (this would normally come from a database)
+        let researchGroups = [
+            { name: "تحليل البيانات الضخمة", goal: "استكشاف وتحليل البيانات الضخمة لتحسين الأداء", members: 5, total: 5 }, // Full group
+            { name: "الذكاء الاصطناعي في الطب", goal: "تحليل تأثير الذكاء الاصطناعي على التشخيص الطبي", members: 4, total: 6 },
+            { name: "تقنيات الأمن السيبراني", goal: "تطوير حلول لحماية البيانات من الهجمات الإلكترونية", members: 4, total: 4 }, // Full group
+        ];
+
+        let researchContainer = document.getElementById("research-groups-container");
+
+        // Populate the research groups
+        function updateGroups() {
+            researchContainer.innerHTML = "";
+            researchGroups.forEach((group, index) => {
+                let groupItem = document.createElement("div");
+                groupItem.classList.add("group-item");
+                groupItem.innerHTML = `
+                    <p><strong>اسم المجموعة:</strong> ${group.name}</p>
+                    <p><strong>الهدف من البحث:</strong> ${group.goal}</p>
+                    <p><strong>عدد الأفراد:</strong> ${group.members} / ${group.total}</p>
+                    ${group.members >= group.total ? 
+                        '<p class="full-group">المجموعة ممتلئة</p>' : 
+                        `<button class="join-button" onclick="joinGroup(${index})">طلب الانضمام</button>`
+                    }
+                `;
+                researchContainer.appendChild(groupItem);
+            });
+        }
+
+        // Handle join group click
+        function joinGroup(index) {
+            if (researchGroups[index].members < researchGroups[index].total) {
+                researchGroups[index].members++;
+                updateGroups();
+                alert("تم إرسال طلب الانضمام بنجاح!");
+            }
+        }
+
+        // Initialize groups
+        updateGroups();
+    </script>
+
+</body>
+</html>

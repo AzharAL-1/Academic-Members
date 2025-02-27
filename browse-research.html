@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مستودع الأبحاث</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        main {
+            padding: 20px;
+        }
+        section {
+            background-color: white;
+            max-width: 800px; /* Prevents it from becoming too wide */
+            margin: 0 auto; /* Centers the section */
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+        }
+        h2{
+            color: #004EA5;
+        }
+         h3 {
+            color: #0197B4;
+        }
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #0197B4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #017F94;
+        }
+        .research-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .research-item:last-child {
+            border-bottom: none;
+        }
+        ul#statistics-container {
+            list-style: none;
+            padding: 0;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        button, .btn {
+    padding: 12px 24px;
+    background-color: #0195B1;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Disabled button/link styling */
+button:disabled, .btn:disabled {
+    background-color: #ccc; /* Disabled color */
+    cursor: not-allowed; /* Change cursor for disabled buttons */
+}
+
+/* Hover effect for buttons/links */
+button:hover, .btn:hover {
+    background-color: #FD9349;
+}
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+              <li><a href="services.html">الخدمات</a></li>
+              <li><a href="about.html">عن المنصة</a></li>
+              <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+              <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+              <li><a href="help.html">مركز المساعدة</a></li>
+              <li><a href="#" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Ghost Users' Research -->
+        <section class="public-researches">
+            <h3>🌍 أبحاث الأعضاء</h3>
+            <div id="public-research-container">
+                <!-- Dynamic Research Entries will be populated by JS -->
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <section class="statistics">
+            <h3>📊 الإحصائيات</h3>
+            <ul id="statistics-container">
+                <!-- Static Stats -->
+                <li>
+                    📊 <strong>الإحصائيات العامة:</strong>
+                    <p>الإعجابات: 52 | الاقتباسات: 21 | الزيارات: 171</p>
+                </li>
+            </ul>
+        </section>
+        <a href="my-research-repository.html" class="back-link">الرجوع</a>
+    </main>
+
+    
+
+    <script>
+        if (window.location.pathname.includes("browse-research.html")) {
+            // Retrieve stored research data from localStorage or set default
+            let ghostUsersResearch = JSON.parse(localStorage.getItem("ghostUsersResearch")) || [
+                { title: "تحليل بيانات التعليم", author: "د. أحمد السالم", date: "2024-01-15", likes: 12, citations: 5, views: 42 },
+                { title: "أثر الذكاء الاصطناعي في الطب", author: "م. نور الهادي", date: "2023-12-10", likes: 18, citations: 7, views: 56 },
+                { title: "الاتجاهات الحديثة في علوم الحاسب", author: "د. فاطمة السبيعي", date: "2024-02-01", likes: 22, citations: 9, views: 73 },
+            ];
+
+            let researchContainer = document.getElementById("public-research-container");
+
+            // Clear existing research items before adding
+            researchContainer.innerHTML = '';
+
+            // Populate research container with ghost user research
+            ghostUsersResearch.forEach((research, index) => {
+                let researchItem = document.createElement("div");
+                researchItem.classList.add("research-item");
+                researchItem.innerHTML = `
+                    <h3>${research.title}</h3>
+                    <p><strong>المؤلف:</strong> ${research.author}</p>
+                    <p><strong>تاريخ النشر:</strong> ${research.date}</p>
+                    <p>👍 <span id="likes-${index}">${research.likes}</span> | 
+                       📖 <span id="citations-${index}">${research.citations}</span> | 
+                       👀 <span id="views-${index}">${research.views}</span>
+                    </p>
+                    <button onclick="likeResearch(${index})">👍 إعجاب</button>
+                    <button onclick="viewResearch(${index})">👀 مشاهدة</button>
+                `;
+                researchContainer.appendChild(researchItem);
+            });
+
+            // Add like interaction
+            window.likeResearch = function (index) {
+                ghostUsersResearch[index].likes += 1;  // Increase likes count for this research
+                document.getElementById(`likes-${index}`).textContent = ghostUsersResearch[index].likes;  // Update the likes in the DOM
+
+                // Save the updated data to localStorage
+                localStorage.setItem("ghostUsersResearch", JSON.stringify(ghostUsersResearch));
+            };
+
+            // Add view interaction
+            window.viewResearch = function (index) {
+                ghostUsersResearch[index].views += 1;  // Increase views count for this research
+                document.getElementById(`views-${index}`).textContent = ghostUsersResearch[index].views;  // Update the views in the DOM
+
+                // Save the updated data to localStorage
+                localStorage.setItem("ghostUsersResearch", JSON.stringify(ghostUsersResearch));
+            };
+        }
+    </script>
+
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>

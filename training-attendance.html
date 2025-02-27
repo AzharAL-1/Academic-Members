@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حضور الدورات التدريبية</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .courses-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .course-item {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: right;
+            border: 1px solid #ccc;
+        }
+
+        .course-item p {
+            margin: 5px 0;
+        }
+
+        .register-button {
+            background-color: #0195B1;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .register-button:hover {
+            background-color: #FD9349;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>حضور الدورات التدريبية</h2>
+        <p>يمكنك التسجيل في الدورات التدريبية المعلنة أدناه:</p>
+
+        <!-- Courses List -->
+        <div class="courses-list" id="courses-container">
+            <!-- Course items will be dynamically added here -->
+        </div>
+
+        <!-- Back to Services -->
+        <a href="professional-development.html" class="back-link">الرجوع</a>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // Sample course data
+        let courses = [
+            { name: "دورة تطوير الذات", description: "دورة تدريبية لتعزيز مهارات القيادة وإدارة الوقت", capacity: 20 },
+            { name: "دورة الذكاء الاصطناعي", description: "دورة متقدمة في تقنيات الذكاء الاصطناعي", capacity: 15 },
+            { name: "دورة الإدارة الفعّالة", description: "دورة لتعلم أساليب الإدارة الحديثة", capacity: 25 }
+        ];
+
+        let coursesContainer = document.getElementById("courses-container");
+
+        // Populate the courses list
+        function displayCourses() {
+            coursesContainer.innerHTML = ''; // Clear existing content
+            courses.forEach((course, index) => {
+                let courseItem = document.createElement("div");
+                courseItem.classList.add("course-item");
+                courseItem.innerHTML = `
+                    <p><strong>اسم الدورة:</strong> ${course.name}</p>
+                    <p><strong>الوصف:</strong> ${course.description}</p>
+                    <p><strong>عدد المقاعد المتاحة:</strong> ${course.capacity}</p>
+                    <button class="register-button" onclick="registerCourse(${index})">التسجيل في الدورة</button>
+                `;
+                coursesContainer.appendChild(courseItem);
+            });
+        }
+
+        // Handle course registration
+        function registerCourse(index) {
+            if (courses[index].capacity > 0) {
+                courses[index].capacity--;
+                displayCourses(); // Re-render courses list after registration
+                alert("تم التسجيل في هذه الدورة بنجاح!");
+            } else {
+                alert("عذرًا، لا توجد مقاعد متاحة.");
+            }
+        }
+
+        // Display the courses on page load
+        displayCourses();
+    </script>
+
+</body>
+</html>

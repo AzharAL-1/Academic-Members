@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التطبيقات التعليمية</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .application-cards-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .application-card {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            width: 30%;
+            transition: box-shadow 0.3s ease;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .application-card:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .application-card h3 {
+            color: #0197B4;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .application-card p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .application-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .register-button {
+            background-color: #0197B4;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .register-button:hover {
+            background-color: #017e94;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .application-card {
+                width: 48%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .application-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo" style="max-width: 150px; margin-bottom: 20px;">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+              <li><a href="services.html">الخدمات</a></li>
+              <li><a href="about.html">عن المنصة</a></li>
+              <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+              <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+              <li><a href="help.html">مركز المساعدة</a></li>
+              <li><a href="#" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>التطبيقات التعليمية</h2>
+        <p>إليك بعض التطبيقات التعليمية المميزة التي يمكن أن تساعد في تحسين تجربتك التعليمية وتطوير مهاراتك الأكاديمية:</p>
+
+        <!-- Educational Applications List -->
+        <div class="application-cards-container">
+            <div class="application-card">
+                <img src="images/gamma-ai.png" alt="Gamma AI">
+                <h3>Gamma AI</h3>
+                <p>تطبيق الذكاء الاصطناعي الذي يساعد الأكاديميون في العروض تقديمية والتقارير بأدوات ذكية.</p>
+                <a href="https://gamma.app/" class="register-button" target="_blank">التسجيل في التطبيق</a>
+            </div>
+
+            <div class="application-card">
+                <img src="images/classpoint.png" alt="Classpoint">
+                <h3>Classpoint</h3>
+                <p>أداة مبتكرة تساعد الأكاديميون في تفاعل الطلاب وتقييمهم في الفصول الدراسية باستخدام تقنيات الذكاء الاصطناعي.</p>
+                <a href="https://www.classpoint.io/" class="register-button" target="_blank">التسجيل في التطبيق</a>
+            </div>
+
+            <div class="application-card">
+                <img src="images/yippity-ai.png" alt="Yippity AI">
+                <h3>Yippity AI</h3>
+                <p> تطبيق الذكاء الاصطناعي الموجه لتوليد اسئلة باستخدام تقنيات تفاعلية مبتكرة يمكنك رفع ملف او نسخ المحتوى المراد تحويله.</p>
+                <a href="https://yippity.io/" class="register-button" target="_blank">التسجيل في التطبيق</a>
+            </div>
+        </div>
+
+        <a href="quality-enhancement.html" class="back-link">الرجوع</a>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+</body>
+</html>

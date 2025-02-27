@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اقتراح مجموعة بحثية</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: right;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .submit-button {
+            background-color: #0195B1;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #FD9349;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <h2>اقتراح مجموعة بحثية</h2>
+            <p>يرجى ملء النموذج أدناه لاقتراح مجموعة بحثية جديدة.</p>
+
+            <!-- Suggest Research Group Form -->
+            <form id="suggest-group-form">
+                <label for="group-name">اسم المجموعة البحثية:</label>
+                <input type="text" id="group-name" required>
+
+                <label for="group-goal">الهدف من المجموعة البحثية:</label>
+                <textarea id="group-goal" rows="3" required></textarea>
+
+                <label for="group-members">عدد أفراد المجموعة:</label>
+                <input type="number" id="group-members" min="1" required>
+
+                <button type="submit" class="submit-button">رفع الطلب</button>
+            </form>
+
+            <!-- Back to Services -->
+            <a href="research-groups.html" class="back-link">الرجوع</a>
+        </div>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        document.getElementById("suggest-group-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent actual form submission
+
+            // Show a pop-up message
+            alert("عليك مراجعة عمادة البحث و الدراسات العليا");
+
+            // Clear form fields
+            document.getElementById("group-name").value = "";
+            document.getElementById("group-goal").value = "";
+            document.getElementById("group-members").value = "";
+        });
+    </script>
+
+</body>
+</html>

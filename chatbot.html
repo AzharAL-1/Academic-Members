@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدردشة الذكية</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css"> <!-- External CSS file -->
+    <style>
+        body {
+            font-family: 'Amiri', serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .commands-guide {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .commands-guide h4 {
+            color: #0197B4;
+        }
+
+        .commands-guide ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .commands-guide li {
+            font-size: 16px;
+            margin: 5px 0;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .commands-guide li:hover {
+            color: #0197B4;
+        }
+
+        .chat-box {
+            width: 100%;
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 80%;
+        }
+
+        .user-message {
+            background-color: #0197B4;
+            color: white;
+            text-align: left;
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background-color: #f1f1f1;
+            color: #333;
+            text-align: right;
+            margin-right: auto;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-box {
+            width: 80%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .send-btn {
+            background-color: #0197B4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background-color: #017e94;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .user-info {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chat Container -->
+    <div class="chat-container">
+        <h2>الدردشة الذكية</h2>
+
+        <!-- Commands Guide Section -->
+        <div class="commands-guide">
+            <h4>أمثلة على الأوامر التي يمكنك استخدامها:</h4>
+            <ul>
+                <li onclick="handleCommand('منصة')">منصة</li>
+                <li onclick="handleCommand('خدمات')">خدمات</li>
+                <li onclick="handleCommand('تعليم')">تعليم</li>
+                <li onclick="handleCommand('وداع')">وداع</li>
+                <li onclick="handleCommand('تسجيل الدخول')">تسجيل الدخول</li>
+                <li onclick="handleCommand('إنشاء حساب')">إنشاء حساب</li>
+                <li onclick="handleCommand('تواصل')">تواصل</li>
+            </ul>
+        </div>
+
+        <div class="chat-box" id="chatBox">
+            <!-- Chat messages will appear here -->
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="userInput" class="input-box" placeholder="أرسل رسالة" />
+            <button class="send-btn" onclick="sendMessage()">إرسال</button>
+        </div>
+    </div>
+    
+    <a href="index.html" class="back-link">الرجوع</a>
+
+    <script>
+        // Function to send user message and display bot response
+        function sendMessage() {
+            var userMessage = document.getElementById("userInput").value;
+            if (userMessage.trim() === "") return; // Prevent sending empty messages
+
+            displayMessage(userMessage, "user");
+            document.getElementById("userInput").value = ""; // Clear input field
+
+            // Bot response logic
+            setTimeout(() => {
+                var botResponse = getBotResponse(userMessage);
+                displayMessage(botResponse, "bot");
+            }, 1000);
+        }
+
+        // Function to handle command click
+        function handleCommand(command) {
+            displayMessage(command, "user");
+
+            setTimeout(() => {
+                var botResponse = getBotResponse(command);
+                displayMessage(botResponse, "bot");
+            }, 1000);
+        }
+
+        // Function to display message in the chat box
+        function displayMessage(message, sender) {
+            var chatBox = document.getElementById("chatBox");
+            var messageDiv = document.createElement("div");
+            messageDiv.classList.add("message", sender + "-message");
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the latest message
+        }
+
+        // Function to generate bot response based on user input
+        function getBotResponse(userMessage) {
+            userMessage = userMessage.toLowerCase();
+
+            if (userMessage.includes("منصة")) {
+                return "منصتنا هي منصة تعليمية لعضو هيئة التدريس تتيح له الوصول إلى الخدمات الأكاديمية مثل الدورات التدريبية والمناسبات العلمية.";
+            } else if (userMessage.includes("خدمات")) {
+                return "منصتنا تقدم مجموعة من الخدمات الأكاديمية مثل دعوات حضور المناسبات العلمية، الدورات التدريبية، وتطوير المهارات الأكاديمية.";
+            } else if (userMessage.includes("تعليم")) {
+                return "نحن نعمل على تحسين جودة التعليم من خلال توفير أدوات دعم أكاديمية وتدريبية لأعضاء هيئة التدريس.";
+            } else if (userMessage.includes("وداع")) {
+                return "نأسف لأنك ستغادر! نحن دائمًا هنا لمساعدتك، لا تتردد في العودة في أي وقت.";
+            } else if (userMessage.includes("تسجيل الدخول")) {
+                return "لتسجيل الدخول، يرجى إدخال بياناتك في صفحة تسجيل الدخول.";
+            } else if (userMessage.includes("إنشاء حساب")) {
+                return "لإنشاء حساب جديد، قم بزيارة صفحة التسجيل وأدخل بياناتك المطلوبة.";
+            } else if (userMessage.includes("تواصل")) {
+                return "للتواصل معنا، يمكنك زيارة صفحة التواصل أو التواصل عبر البريد الإلكتروني المقدم.";
+            } else {
+                return "آسف، لم أفهم ذلك. يمكنني مساعدتك في أمور مثل المنصة، الخدمات الأكاديمية، التعليم، أو التفاعل معنا.";
+            }
+        }
+    </script>
+</body>
+</html>

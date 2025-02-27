@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأفكار الملهمة</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .idea-card {
+            background-color: #f1f1f1;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .idea-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .idea-card h3 {
+            color: #0195B1;
+        }
+
+        .idea-card p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .submit-idea-button {
+            background-color: #0195B1;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-idea-button:hover {
+            background-color: #FD9349;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2>الأفكار الملهمة</h2>
+
+        <!-- Idea Submission Section -->
+        <div class="idea-card">
+            <h3>مشاركة فكرتك الملهمة</h3>
+            <p>هل لديك فكرة جديدة لتحسين التعليم؟ شاركها مع المجتمع الأكاديمي وكن جزءاً من تحسين التعليم والتعلم.</p>
+            <textarea id="idea-input" rows="4" placeholder="اكتب فكرتك هنا..." style="width: 100%; padding: 10px;"></textarea>
+            <button class="submit-idea-button" onclick="submitIdea()">إرسال الفكرة</button>
+        </div>
+
+        <a href="quality-enhancement.html" class="back-link">الرجوع</a>
+    </main>
+
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+
+    <script>
+        // Handle idea submission
+        function submitIdea() {
+            var ideaText = document.getElementById("idea-input").value;
+            if (ideaText.trim() === "") {
+                alert("يرجى كتابة فكرتك أولاً!");
+            } else {
+                // Simulate idea submission process (you can connect to backend here)
+                alert("تم إرسال فكرتك بنجاح! شكرًا لمساهمتك.");
+                document.getElementById("idea-input").value = ""; // Clear the input after submission
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        main{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo ABOVE bar -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <!-- Navigation bar -->
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="about.html">عن المنصة</a></li>
+                <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+                <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+                <li><a href="help.html">مركز المساعدة</a></li>
+                <li><a href="logout.html" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <h2>معلومات الحساب</h2>
+            <p><strong>الاسم الكامل:</strong> <span id="display-fullName">غير متوفر</span></p>
+            <p><strong>التخصص:</strong> <span id="display-specialty">غير متوفر</span></p>
+            <p><strong>البريد الإلكتروني:</strong> <span id="display-email">غير متوفر</span></p>
+            <p><strong>رقم الهاتف:</strong> <span id="display-phone">غير متوفر</span></p>
+            <p><strong>اسم المستخدم:</strong> <span id="display-username">غير متوفر</span></p>
+
+            <button id="logout-btn">تسجيل الخروج</button>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let fullName = localStorage.getItem("fullName") || "غير متوفر";
+            let specialty = localStorage.getItem("specialty") || "غير متوفر";
+            let email = localStorage.getItem("email") || "غير متوفر";
+            let phone = localStorage.getItem("phone") || "غير متوفر";
+            let username = localStorage.getItem("username") || "غير متوفر";
+    
+            // Display retrieved data in profile page
+            document.getElementById("display-fullName").textContent = fullName;
+            document.getElementById("display-specialty").textContent = specialty;
+            document.getElementById("display-email").textContent = email;
+            document.getElementById("display-phone").textContent = phone;
+            document.getElementById("display-username").textContent = username;
+    
+            // Also update header full name
+            let headerRegister = document.getElementById("header-register");
+            if (headerRegister) {
+                headerRegister.textContent = fullName;
+                headerRegister.href = "profile.html"; 
+            }
+    
+            // Logout functionality
+            document.getElementById("logout-btn").addEventListener("click", function () {
+                if (confirm("هل أنت متأكد أنك تريد تسجيل الخروج؟")) {
+                    localStorage.clear();
+                    alert("تم تسجيل الخروج بنجاح!");
+                    window.location.href = "index.html"; // Redirect to home after logout
+                }
+            });
+        });
+    </script>
+     <footer>
+        <p>© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+    
+</body>
+</html>

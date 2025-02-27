@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مستودع أبحاثي</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Basic styles for demonstration */
+        
+        main {
+            padding: 20px;
+        }
+        section {
+            background-color: white;
+            max-width: 800px; /* Prevents it from becoming too wide */
+            margin: 0 auto; /* Centers the section */
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+        }
+        h2{
+            color: #004EA5;
+        }
+         h3 {
+            color: #0197B4;
+        }
+        form label {
+            display: block;
+            margin-top: 10px;
+        }
+        form input, form select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #0197B4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #017F94;
+        }
+        .research-item {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+        .research-item:last-child {
+            border-bottom: none;
+        }
+        ul#statistics-container {
+            list-style: none;
+            padding: 0;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0197B4;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo and Navigation -->
+    <div class="logo-container">
+        <img src="images/logo.png" alt="الشعار" class="logo">
+    </div>
+
+    <header id="navbar">
+        <nav>
+            <ul class="right-side">
+              <li><a href="services.html">الخدمات</a></li>
+              <li><a href="about.html">عن المنصة</a></li>
+              <li><a href="index.html">الرئيسية</a></li>
+            </ul>
+            <ul class="left-side">
+              <li><a href="register.html" id="header-register">تسجيل الدخول</a></li>
+              <li><a href="help.html">مركز المساعدة</a></li>
+              <li><a href="#" id="logout-link" style="display: none;">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2 style="text-align: center">📚 مستودع الأبحاث</h2>
+
+        <!-- Add Research -->
+        <section class="research-upload">
+            <h3>📌 أضف البحث</h3>
+            <p>تتيح لعضو إضافة أبحاثه ومنتجاته العلمية هنا، وتظل خاصة بالعضو إلى أن يسمح بمشاركتها مع الآخرين.</p>
+            
+            <form id="add-research-form">
+                <label for="research-title">عنوان البحث:</label>
+                <input type="text" id="research-title" required>
+
+                <label for="research-date">تاريخ البحث:</label>
+                <input type="date" id="research-date" required>
+
+                <label for="research-file">رفع ملف البحث:</label>
+                <input type="file" id="research-file" accept=".pdf,.doc,.docx" required>
+
+                <button type="submit">إضافة البحث</button>
+            </form>
+        </section>
+
+        <!-- User's Research List -->
+        <section class="research-list">
+            <h3>📢 أبحاثي</h3>
+            <ul id="research-list"></ul>
+        </section>
+
+        <!-- Public Researches -->
+        <section class="browse-research-link">
+            <h3>أبحاث الأعضاء   🌍🔍</h3>
+            <ul id="public-research-container"></ul>
+            <button onclick="window.location.href='browse-research.html'">استعراض الأبحاث العامة</button>
+        </section>
+
+        <!-- Statistics -->
+        <section class="statistics">
+            <h3>📊 الإحصائيات</h3>
+            <p>عدد الإعجابات بالبحث، عدد الاقتباسات، وعدد الزيارات.</p>
+            <ul id="statistics-container"></ul>
+        </section>
+        <a href="research-services.html" class="back-link">الرجوع</a>
+
+    </main>
+
+    <!-- Script for Handling Research Logic -->
+    <script>
+        /** ==========================
+         *  My Research Repository
+         ========================== */
+        if (window.location.pathname.includes("my-research-repository.html")) {
+            let researchList = JSON.parse(localStorage.getItem("userResearches")) || [];
+
+            function renderResearches() {
+                let researchContainer = document.getElementById("research-list");
+                researchContainer.innerHTML = "";
+                researchList.forEach((research, index) => {
+                    let researchItem = document.createElement("div");
+                    researchItem.classList.add("research-item");
+                    researchItem.innerHTML = `
+                        <h3>${research.title}</h3>
+                        <p><strong>تاريخ الإضافة:</strong> ${research.date}</p>
+                        <button onclick="shareResearch(${index})">مشاركة</button>
+                        <p>👍 <span id="likes-${index}">${research.likes}</span> | 
+                           📖 <span id="citations-${index}">${research.citations}</span> | 
+                           👀 <span id="views-${index}">${research.views}</span>
+                        </p>
+                    `;
+                    researchContainer.appendChild(researchItem);
+                });
+            }
+
+            document.getElementById("add-research-form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                let researchTitle = document.getElementById("research-title").value;
+                let newResearch = {
+                    title: researchTitle,
+                    date: new Date().toLocaleDateString(),
+                    likes: 0,
+                    citations: 0,
+                    views: 0,
+                };
+                researchList.push(newResearch);
+                localStorage.setItem("userResearches", JSON.stringify(researchList));
+                renderResearches();
+            });
+
+            window.shareResearch = function (index) {
+                researchList[index].likes += Math.floor(Math.random() * 10); // Simulate likes
+                researchList[index].citations += Math.floor(Math.random() * 5); // Simulate citations
+                researchList[index].views += Math.floor(Math.random() * 20); // Simulate views
+                localStorage.setItem("userResearches", JSON.stringify(researchList));
+                renderResearches();
+            };
+
+            renderResearches();
+        }
+    </script>
+    <footer>
+        <p style="text-align: center;">© 2025 منصتنا. جميع الحقوق محفوظة.</p>
+    </footer>
+</body>
+</html>

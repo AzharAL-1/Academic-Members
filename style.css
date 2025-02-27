@@ -1,0 +1,343 @@
+@import url(https://fonts.googleapis.com/earlyaccess/amiri.css);
+
+body {
+    font-family: 'Frutiger Arabic', 'Cairo', 'GE SS Unique', 'Almarai', serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    line-height: 1.6;
+    text-align: right;
+    background-color: #d9d9d9;
+    color: #333;
+}
+
+.logo-container {
+    text-align: left; /* Align logo to the left */
+    margin: 0 0 5px 0;
+    flex-shrink: 0;
+}
+
+.logo {
+    height: 130px;
+    width: auto;
+}
+
+/* Sticky navigation bar */
+#navbar {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to right, #0197B4, #0277BD);
+    color: white;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+header {
+    background-color: #0195B1; /* Primary Color */
+    padding: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Make the nav container a flexbox and override RTL for ordering */
+nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    direction: ltr; /* Temporarily use LTR to apply our ordering */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px; /* Space between navigation items */
+}
+
+/* Order the lists: left-side first, right-side second */
+.left-side {
+    order: 1;
+}
+
+.right-side {
+    order: 2;
+    margin-left: auto;
+}
+
+
+/* Ensure nav link text remains in Arabic RTL */
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 15px 16px;
+    font-size: 1.1em;
+    font-weight: bold;
+    direction: rtl;  /* Ensure Arabic text displays in RTL */
+    transition: color 0.3s ease;
+}
+
+nav li a:hover {
+    color: #FD9349; /* Secondary Accent */
+}
+
+
+h1, h2 {
+    color: #004EA5; /* Dark Blue for strong contrast */
+}
+
+h1 {
+    font-size: 2.2em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+/* Form container styling */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px; /* Limit the width of the form */
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Light shadow for form */
+}
+
+/* Label styling */
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Input and select field styling */
+input, select {
+    padding: 10px;
+    margin-bottom: 15px; /* Space between fields */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Focus effect on input/select */
+input:focus, select:focus {
+    outline: none;
+    border-color: #004EA5; /* Blue border on focus */
+}
+
+/* Button and link styling */
+button, .btn {
+    padding: 12px 24px;
+    background-color: #0195B1;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Disabled button/link styling */
+button:disabled, .btn:disabled {
+    background-color: #ccc; /* Disabled color */
+    cursor: not-allowed; /* Change cursor for disabled buttons */
+}
+
+/* Hover effect for buttons/links */
+button:hover, .btn:hover {
+    background-color: #FD9349;
+}
+
+#contact-us h2, #faq h2 {
+    color: #0195B1;
+}
+
+#contact-us p, #faq p {
+    color: #333;
+}
+
+/* General fade-in */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Pulse effect for CTA */
+.cta {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1.2em;
+    background-color: #0197B4;
+    color: white;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+.cta:hover {
+    background-color: #0277BD;
+}
+
+/* Animations */
+.pulse {
+    animation: pulse-animation 1s infinite;
+}
+
+@keyframes pulse-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* Faculty message styling */
+#faculty-message {
+    font-size: 14px;
+    margin-top: 5px;
+    color: red; /* Red text for error or alert messages */
+}
+.payment-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.payment-box p {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.payment-box .btn {
+    background-color: #0195B1;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.payment-box .btn:hover {
+    background-color: #FD9349;
+}
+
+/* Gradient for sections with provided colors */
+#welcome {
+    background: linear-gradient(to right, #13538a, #0195B1); /* Dark blue to light blue */
+    color: white;
+}
+    
+#mission {
+    background: linear-gradient(to right, #0195B1, #FD9349); /* Light blue to orange */
+    color: white;
+}
+
+#vision {
+    background: linear-gradient(to right, #13538a, #0195B1); /* Dark blue to light blue */
+    color: white;
+}
+
+#values {
+    background: linear-gradient(to right, #FD9349, #0195B1); /* Orange to light blue */
+    color: white;
+}
+
+#features {
+    background: linear-gradient(to right, #13538a, #0195B1); /* Dark blue to light blue */
+    color: white;
+}
+
+
+.payment-method {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+.payment-method .payment-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.payment-method img {
+    margin-left: 10px;
+}
+.payment-method input[type="radio"] {
+    margin-left: 15px;
+}
+.payment-method label {
+    display: block;
+    margin-bottom: 5px;
+}
+.payment-method input[type="text"], 
+.payment-method input[type="number"], 
+.payment-method input[type="month"], 
+.payment-method input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+.payment-method input[type="text"]:focus, 
+.payment-method input[type="number"]:focus, 
+.payment-method input[type="month"]:focus, 
+.payment-method input[type="password"]:focus {
+    background-color: #0197B4;
+    outline: none;
+}
+
+.payment-method input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #0195B1;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: space-between;
+}
+
+.payment-method .form-field {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.payment-method .form-field label,
+.payment-method .form-field input {
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.payment-method .form-field label {
+    margin-bottom: 5px;
+}
+
+
+footer {
+    color: white;
+    background-color: #004EA5;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Ensure footer stays at the bottom */
+}

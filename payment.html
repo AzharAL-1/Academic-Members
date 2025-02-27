@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدفع و التأكيد</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button[type="submit"] {
+            background-color: #004EA5;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: space-between;
+        }
+        input[type="reset"] {
+            padding: 12px 24px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            background-color: #f0f0f0;
+        }
+        input[type="reset"]:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="paymentForm" onsubmit="return handlePaymentSubmission(event)">
+            <div class="header">
+                <h1>الدفع و التأكيد</h1>
+                <h2 style="text-align: center; margin-bottom: 10px;">سعر العضوية السنوية: 100 ريال سعودي</h2>
+
+            </div>
+            
+            <div class="payment-method">
+                <label>طريقة الدفع :</label>
+                <div class="payment-option">
+                    <input type="radio" id="mada-card" name="payment-method" onclick="togglePaymentMethod('mada')" checked> 
+                    <label for="mada-card">بطاقة مدى</label>
+                    <img src="./images/mada.png" alt="Mada Logo" width="70" height="40">
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="credit-card" name="payment-method" onclick="togglePaymentMethod('credit')"> 
+                    <label for="credit-card">بطاقة ائتمانية</label>
+                    <img src="./images/masterCard.jpg" alt="Mastercard Logo" width="70" height="40">
+                </div>
+            </div>
+
+            <!-- Mada payment form -->
+            <div id="mada-fields" class="hidden">
+                <h3>تفاصيل بطاقة مدى</h3>
+                <div class="form-field">
+                    <label for="mada-name-on-card">الاسم على البطاقة :</label>
+                    <input type="text" id="mada-name-on-card" name="name-on-card" required>
+                </div>
+                <div class="form-field">
+                    <label for="mada-card-number">رقم البطاقة :</label>
+                    <input type="text" id="mada-card-number" name="card-number" pattern="\d{16}" required>
+                </div>
+                <div class="form-field">
+                    <label for="mada-expiry-date">تاريخ الإنتهاء :</label>
+                    <input type="month" id="mada-expiry-date" name="expiry-date" required>
+                </div>
+                <div class="form-field">
+                    <label for="mada-cvv">CVV:</label>
+                    <input type="password" id="mada-cvv" name="cvv" pattern="\d{3}" required>
+                </div>
+            </div>
+
+            <!-- Credit Card payment form -->
+            <div id="credit-fields" class="hidden">
+                <h3>تفاصيل البطاقة الائتمانية</h3>
+               <div> 
+                 <label for="credit-name-on-card">الاسم على البطاقة :</label>
+                 <input type="text" id="credit-name-on-card" name="name-on-card" disabled required>
+               </div>
+               <div>
+                 <label for="credit-card-number">رقم البطاقة :</label>
+                 <input type="text" id="credit-card-number" name="card-number" pattern="\d{16}" disabled required>
+               </div>
+               <div>
+                 <label for="credit-expiry-date">تاريخ الإنتهاء :</label>
+                 <input type="month" id="credit-expiry-date" name="expiry-date" disabled required>
+               </div> 
+               <div>
+                 <label for="credit-cvv">CVV:</label>
+                 <input type="password" id="credit-cvv" name="cvv" pattern="\d{3}" disabled required>
+               </div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit">تأكيد الشراء</button>
+                <input type="reset" value="مسح">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function togglePaymentMethod(method) {
+            const madaFields = document.getElementById('mada-fields');
+            const creditFields = document.getElementById('credit-fields');
+            
+            if (method === 'mada') {
+                madaFields.querySelectorAll('input').forEach(input => input.disabled = false);
+                creditFields.querySelectorAll('input').forEach(input => input.disabled = true);
+                madaFields.classList.remove('hidden');
+                creditFields.classList.add('hidden');
+            } else {
+                madaFields.querySelectorAll('input').forEach(input => input.disabled = true);
+                creditFields.querySelectorAll('input').forEach(input => input.disabled = false);
+                madaFields.classList.add('hidden');
+                creditFields.classList.remove('hidden');
+            }
+        }
+
+        function handlePaymentSubmission(event) {
+            event.preventDefault();
+            
+            // Basic validation
+            const form = event.target;
+            if (!form.checkValidity()) {
+                alert('يرجى ملء جميع الحقول المطلوبة بشكل صحيح');
+                return false;
+            }
+
+            // Process payment here (simulated)
+            if (processPayment()) {
+                window.location.href = 'index.html'; // Redirect after successful payment
+                return false;
+            }
+            
+            return false;
+        }
+
+        function processPayment() {
+            // Add actual payment processing logic here
+            return true; // Simulate successful payment
+        }
+
+        // Initialize default state
+        togglePaymentMethod('mada');
+        
+        // On page load, check if the user's name is in localStorage
+        window.onload = function() {
+        let username = localStorage.getItem('username');
+            if (username) {
+                // Display the user's name in the confirmation message
+                 document.getElementById("paymentConfirmation").textContent = "تم الدفع بنجاح، " + username;
+            }
+        }
+
+        // On page load, check if the user's name is in localStorage
+        window.onload = function() {
+            let username = localStorage.getItem('username');
+            if (username) {
+                // Change the register link to the user's name
+                document.getElementById("header-register").textContent = username;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+        let username = localStorage.getItem("username");
+        if (!username) {
+        console.log("Username not found in localStorage. Redirecting to register...");
+        window.location.href = "register.html"; // Redirect back if username is lost
+            }
+        });
+
+
+    </script>
+</body>
+</html>
